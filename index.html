@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aprende Español — Apprendre l'espagnol</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+        <rect width="36" height="36" rx="8" fill="#1E2A30"/>
+        <path d="M18 4L32 13V23L18 32L4 23V13L18 4Z" fill="none" stroke="#C1542C" stroke-width="1.5"/>
+        <path d="M18 10L27 15.5V24.5L18 30L9 24.5V15.5L18 10Z" fill="#C1542C" opacity="0.15"/>
+        <circle cx="18" cy="18" r="3" fill="#D9A441"/>
+        <line x1="18" y1="4" x2="18" y2="10" stroke="#C1542C" stroke-width="1.5"/>
+        <line x1="18" y1="26" x2="18" y2="32" stroke="#C1542C" stroke-width="1.5"/>
+        <line x1="4" y1="13" x2="9" y2="15.5" stroke="#C1542C" stroke-width="1.5"/>
+        <line x1="27" y1="20.5" x2="32" y2="23" stroke="#C1542C" stroke-width="1.5"/>
+        <line x1="4" y1="23" x2="9" y2="20.5" stroke="#C1542C" stroke-width="1.5"/>
+        <line x1="27" y1="15.5" x2="32" y2="13" stroke="#C1542C" stroke-width="1.5"/>
+      </svg>
+    </span>
+    <div class="brand-text">
+      <span class="brand-es">Aprende Español</span>
+      <span class="brand-fr">Apprendre l'espagnol</span>
+    </div>
+  </div>
+  <nav class="tabs" aria-label="Navigation principale">
+    <button class="tab active" data-view="lecons">
+      <span class="tab-icon">📖</span>Leçons
+    </button>
+    <button class="tab" data-view="epreuve">
+      <span class="tab-icon">✏️</span>Épreuve
+    </button>
+    <button class="tab" data-view="recherche">
+      <span class="tab-icon">🔍</span>Recherche
+    </button>
+    <button class="tab" data-view="traducteur">
+      <span class="tab-icon">⇄</span>Traducteur
+    </button>
+    <button class="tab" data-view="voix">
+      <span class="tab-icon">🎙️</span>Voix
+    </button>
+  </nav>
+</header>
+
+<main id="app">
+
+  <!-- ===== LEÇONS ===== -->
+  <section id="view-lecons" class="view active">
+    <div class="hero">
+      <div class="hero-tile-bg" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="hero-eyebrow">Vocabulaire contextuel</p>
+        <h1 class="hero-title">Parler espagnol,<br><em>dans la vraie vie</em></h1>
+        <p class="hero-sub">Cinq familles de mots classées par situation. Choisissez une catégorie pour explorer ses fiches.</p>
+      </div>
+    </div>
+    <div id="categories-grid" class="tile-grid"></div>
+  </section>
+
+  <section id="view-categorie" class="view">
+    <div class="section-head">
+      <button class="back-link" id="btn-back-categories">← Retour aux catégories</button>
+      <h1 id="categorie-titre">Catégorie</h1>
+      <p class="section-lede" id="categorie-soustitre"></p>
+    </div>
+    <div id="categorie-items" class="card-list"></div>
+  </section>
+
+  <!-- ===== ÉPREUVE ===== -->
+  <section id="view-epreuve" class="view">
+    <div class="section-head">
+      <h1>Épreuve</h1>
+      <p class="section-lede">Vingt questions tirées aléatoirement du lexique. Les questions de la dernière épreuve sont exclues du tirage, afin de varier les révisions.</p>
+    </div>
+
+    <div id="quiz-intro" class="quiz-panel">
+      <p id="quiz-pool-info" class="muted"></p>
+      <button id="btn-start-quiz" class="btn-primary">Commencer l'épreuve</button>
+    </div>
+
+    <div id="quiz-running" class="quiz-panel hidden">
+      <div class="quiz-progress">
+        <div class="quiz-progress-bar"><div id="quiz-progress-fill"></div></div>
+        <span id="quiz-progress-label">Question 1 / 20</span>
+      </div>
+      <p class="quiz-direction" id="quiz-direction"></p>
+      <h2 id="quiz-question" class="quiz-question"></h2>
+      <div id="quiz-options" class="quiz-options"></div>
+      <p id="quiz-feedback" class="quiz-feedback" aria-live="polite"></p>
+      <button id="btn-next-question" class="btn-primary hidden">Question suivante →</button>
+    </div>
+
+    <div id="quiz-result" class="quiz-panel hidden">
+      <h2 id="quiz-score-title">Résultat</h2>
+      <p id="quiz-score-detail" class="muted"></p>
+      <div id="quiz-review" class="quiz-review"></div>
+      <button id="btn-retry-quiz" class="btn-primary">Nouvelle épreuve</button>
+    </div>
+  </section>
+
+  <!-- ===== RECHERCHE ===== -->
+  <section id="view-recherche" class="view">
+    <div class="section-head">
+      <h1>Recherche</h1>
+      <p class="section-lede">Cherchez une expression en français ou en espagnol pour obtenir son explication bilingue et un exemple en contexte.</p>
+    </div>
+    <div class="search-bar">
+      <span class="search-icon" aria-hidden="true">🔍</span>
+      <input type="text" id="search-input" placeholder="café, gracias, entretien…" autocomplete="off">
+    </div>
+    <p id="search-status" class="muted"></p>
+    <div id="search-results" class="card-list"></div>
+  </section>
+
+  <!-- ===== TRADUCTEUR ===== -->
+  <section id="view-traducteur" class="view">
+    <div class="section-head">
+      <h1>Traducteur</h1>
+      <p class="section-lede">Outil basé sur le lexique de l'application : il reconnaît les mots et expressions déjà enregistrés, et traduit mot à mot le reste. Ce n'est pas un moteur de traduction généraliste.</p>
+    </div>
+
+    <div class="translator-grid">
+      <div class="translator-pane">
+        <label for="trad-es"><span class="lang-flag">🇪🇸</span> Español</label>
+        <textarea id="trad-es" rows="5" placeholder="Escribe aquí…"></textarea>
+      </div>
+      <button id="btn-swap" class="swap-btn" title="Inverser le sens" aria-label="Inverser le sens">⇄</button>
+      <div class="translator-pane">
+        <label for="trad-fr"><span class="lang-flag">🇫🇷</span> Français</label>
+        <textarea id="trad-fr" rows="5" placeholder="Écrivez ici…"></textarea>
+      </div>
+    </div>
+    <div class="translator-actions">
+      <button id="btn-translate-to-fr" class="btn-primary">ES → FR</button>
+      <button id="btn-translate-to-es" class="btn-primary btn-outline">FR → ES</button>
+    </div>
+    <p id="trad-note" class="muted"></p>
+  </section>
+
+  <!-- ===== VOIX ===== -->
+  <section id="view-voix" class="view">
+    <div class="section-head">
+      <h1>Message vocal</h1>
+      <p class="section-lede">Parlez en espagnol : la transcription s'affiche au fil de la parole, puis une traduction mot à mot est proposée, avec une lecture audio.</p>
+    </div>
+
+    <p id="voice-support-warning" class="warning-box hidden"></p>
+
+    <div class="voice-panel">
+      <div class="mic-wrapper">
+        <button id="btn-mic" class="mic-btn" aria-pressed="false">
+          <span id="mic-icon" aria-hidden="true">🎙️</span>
+        </button>
+        <span id="mic-label" class="mic-label">Appuyer pour parler</span>
+      </div>
+
+      <div class="voice-blocks">
+        <div class="voice-block">
+          <h3><span class="lang-flag">🇪🇸</span> Transcription</h3>
+          <p id="voice-transcript" class="voice-transcript">—</p>
+        </div>
+
+        <div class="voice-block">
+          <h3><span class="lang-flag">🇫🇷</span> Traduction proposée</h3>
+          <p id="voice-translation" class="voice-transcript">—</p>
+          <div class="listen-row">
+            <button id="btn-listen-es" class="btn-secondary" disabled>🔊 Écouter ES</button>
+            <button id="btn-listen-fr" class="btn-secondary" disabled>🔊 Écouter FR</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
